@@ -6,11 +6,11 @@ os.environ.setdefault('SECRET_KEY', 'test-secret')
 os.environ.setdefault('DATABASE_URL', 'sqlite:///:memory:')
 os.environ.setdefault('JWT_SECRET_KEY', 'test-jwt-secret')
 
-from app import create_app, db
-from app.analytics.service import dashboard_summary, generate_insights, monthly_expense_trend
-from app.models.expense import Expense
-from app.models.income import Income
-from app.models.user import User
+from apps import create_app, db
+from apps.analytics.service import dashboard_summary, generate_insights, monthly_expense_trend
+from apps.models.expense import Expense
+from apps.models.income import Income
+from apps.models.user import User
 
 
 class AppTestCase(unittest.TestCase):
