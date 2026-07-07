@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% block title %}Register · Calex - Calculate Your Expense{% endblock %}
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-lg-5 col-md-7">
+        <div class="glass-card hero-card">
+            <span class="section-label mb-3">Create Account</span>
+            <div class="mb-4">
+                <h2 class="page-title mb-1">Create your account</h2>
+                <p class="subtle mb-0">Start tracking your finances in minutes.</p>
+            </div>
+            <form method="POST" class="vstack gap-3">
+                <div>
+                    <label class="form-label">Username</label>
+                    <input type="text" name="username" class="form-control" placeholder="Your display name" autocomplete="username" required>
+                </div>
+                <div>
+                    <label class="form-label">Email</label>
+                    <input type="email" name="email" class="form-control" placeholder="you@example.com" autocomplete="email" required>
+                </div>
+                <div>
+                    <label class="form-label">Password</label>
+                    <input type="password" name="password" class="form-control" placeholder="Minimum 8 characters" autocomplete="new-password" required>
+                </div>
+                <button class="btn btn-primary w-100" type="submit">Create Account</button>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

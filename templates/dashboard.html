@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+{% block title %}Dashboard · Calex - Calculate Your Expense{% endblock %}
+{% block content %}
+<div class="glass-card hero-card mb-4">
+    <div class="toolbar">
+        <div>
+            <span class="section-label mb-3">Overview</span>
+            <h1 class="page-title mb-2">Welcome back, {{ current_user.username }}.</h1>
+            <p class="subtle mb-0">Track, compare, and control your spending from one clean workspace.</p>
+        </div>
+        <div class="chip-row">
+            <span class="chip">Secure</span>
+            <span class="chip">Fast</span>
+            <span class="chip">Mobile ready</span>
+        </div>
+    </div>
+</div>
+
+<div class="metric-grid">
+    <div class="metric-card">
+        <div class="metric-label">Primary Action</div>
+        <div class="metric-value">Add Expense</div>
+        <a href="{{ url_for('expenses.add_expense') }}" class="btn btn-primary mt-3 w-100">New Record</a>
+    </div>
+    <div class="metric-card">
+        <div class="metric-label">Explore</div>
+        <div class="metric-value">Expenses</div>
+        <a href="{{ url_for('expenses.list_expenses') }}" class="btn btn-soft mt-3 w-100">Open Ledger</a>
+    </div>
+    <div class="metric-card">
+        <div class="metric-label">Income</div>
+        <div class="metric-value">Track cash flow</div>
+        <a href="{{ url_for('income.list_income') }}" class="btn btn-soft mt-3 w-100">View Income</a>
+    </div>
+    <div class="metric-card">
+        <div class="metric-label">Budgets</div>
+        <div class="metric-value">Plan monthly</div>
+        <a href="{{ url_for('budgets.list_budgets') }}" class="btn btn-soft mt-3 w-100">View Budgets</a>
+    </div>
+</div>
+
+<div class="glass-card">
+    <h2 class="page-title">How to use the app</h2>
+    <div class="row g-3">
+        <div class="col-md-4"><div class="metric-card h-100"><div class="metric-label">1. Capture</div><div class="subtle">Log expenses and income in a few clicks.</div></div></div>
+        <div class="col-md-4"><div class="metric-card h-100"><div class="metric-label">2. Review</div><div class="subtle">Search, sort, and compare by category or date.</div></div></div>
+        <div class="col-md-4"><div class="metric-card h-100"><div class="metric-label">3. Improve</div><div class="subtle">Use budgets and analytics to tighten control.</div></div></div>
+    </div>
+</div>
+{% endblock %}

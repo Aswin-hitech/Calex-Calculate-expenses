@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% block title %}{{ report_type }} Report · Calex - Calculate Your Expense{% endblock %}
+{% block content %}
+<div class="glass-card">
+    <div class="toolbar">
+        <div>
+            <h1 class="page-title mb-2">{{ report_type }} Report</h1>
+            <p class="subtle mb-0">Printable report with charts, statistics, predictions, and insights.</p>
+        </div>
+        <div class="d-flex gap-2">
+            <a href="{{ url_for('analytics.download_monthly_pdf') }}" class="btn btn-primary">Monthly PDF</a>
+            <a href="{{ url_for('analytics.download_yearly_pdf') }}" class="btn btn-primary">Yearly PDF</a>
+        </div>
+    </div>
+    <div class="metric-grid">
+        <div class="metric-card"><div class="metric-label">Monthly expense</div><div class="metric-value">₹{{ data.summary.total_expense }}</div></div>
+        <div class="metric-card"><div class="metric-label">Income</div><div class="metric-value">₹{{ data.summary.total_income }}</div></div>
+        <div class="metric-card"><div class="metric-label">Score</div><div class="metric-value">{{ data.health.score }}</div></div>
+        <div class="metric-card"><div class="metric-label">Records</div><div class="metric-value">{{ data.summary.expense_count }}</div></div>
+    </div>
+</div>
+{% endblock %}

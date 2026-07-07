@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+{% block title %}Global Search · Calex - Calculate Your Expense{% endblock %}
+{% block content %}
+<div class="glass-card">
+    <div class="toolbar">
+        <div>
+            <h1 class="page-title mb-2">Global search</h1>
+            <p class="subtle mb-0">Search across expenses, income, and budgets.</p>
+        </div>
+        <form method="GET" action="{{ url_for('analytics.global_search') }}" class="d-flex gap-2">
+            <input type="search" name="q" value="{{ query }}" class="form-control" placeholder="Search anything..." style="min-width:280px;">
+            <button class="btn btn-primary" type="submit">Search</button>
+        </form>
+    </div>
+    {% if query %}
+    <div class="row g-4 mt-1">
+        <div class="col-lg-4">
+            <div class="metric-card">
+                <div class="metric-label">Expenses</div>
+                <div class="metric-value">{{ results.expenses|length }}</div>
+            </div>
+        </div>
+        <div class="col-lg-4">
+            <div class="metric-card">
+                <div class="metric-label">Income</div>
+                <div class="metric-value">{{ results.incomes|length }}</div>
+            </div>
+        </div>
+        <div class="col-lg-4">
+            <div class="metric-card">
+                <div class="metric-label">Budgets</div>
+                <div class="metric-value">{{ results.budgets|length }}</div>
+            </div>
+        </div>
+    </div>
+    {% endif %}
+</div>
+{% endblock %}

@@ -1,0 +1,69 @@
+{% extends 'base.html' %}
+{% block title %}Analytics · Calex - Calculate Your Expense{% endblock %}
+{% block content %}
+<div class="glass-card hero-card mb-4">
+    <div class="toolbar">
+        <div>
+            <h1 class="page-title mb-2">Analytics dashboard</h1>
+            <p class="subtle mb-0">Reports, predictions, insights, and statistics generated from your own data.</p>
+        </div>
+        <div class="d-flex gap-2 flex-wrap">
+            <a class="btn btn-soft" href="{{ url_for('analytics.monthly_report') }}">Monthly Report</a>
+            <a class="btn btn-soft" href="{{ url_for('analytics.yearly_report') }}">Yearly Report</a>
+            <a class="btn btn-primary" href="{{ url_for('analytics.download_monthly_pdf') }}">Download Monthly PDF</a>
+            <a class="btn btn-primary" href="{{ url_for('analytics.download_yearly_pdf') }}">Download Yearly PDF</a>
+        </div>
+    </div>
+</div>
+
+<div class="metric-grid">
+    <div class="metric-card"><div class="metric-label">Total expense</div><div class="metric-value">₹{{ data.summary.total_expense }}</div></div>
+    <div class="metric-card"><div class="metric-label">Total income</div><div class="metric-value">₹{{ data.summary.total_income }}</div></div>
+    <div class="metric-card"><div class="metric-label">Balance</div><div class="metric-value">₹{{ data.summary.balance }}</div></div>
+    <div class="metric-card"><div class="metric-label">Health score</div><div class="metric-value">{{ data.health.score }} / 100</div></div>
+</div>
+
+<div class="row g-4">
+    <div class="col-lg-6">
+        <div class="glass-card h-100">
+            <h2 class="page-title">AI Insights</h2>
+            <ul class="list-unstyled mb-0 vstack gap-2">
+                {% for item in data.insights %}
+                <li class="metric-card">{{ item }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+    <div class="col-lg-6">
+        <div class="glass-card h-100">
+            <h2 class="page-title">Statistics</h2>
+            <div class="row g-3">
+                <div class="col-6"><div class="metric-card"><div class="metric-label">Average</div><div class="metric-value">₹{{ data.stats.average }}</div></div></div>
+                <div class="col-6"><div class="metric-card"><div class="metric-label">Median</div><div class="metric-value">₹{{ data.stats.median }}</div></div></div>
+                <div class="col-6"><div class="metric-card"><div class="metric-label">Std Dev</div><div class="metric-value">₹{{ data.stats.std_dev }}</div></div></div>
+                <div class="col-6"><div class="metric-card"><div class="metric-label">Range</div><div class="metric-value">₹{{ data.stats.range }}</div></div></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="glass-card">
+    <h2 class="page-title">Exports</h2>
+    <div class="d-flex gap-2 flex-wrap">
+        <a class="btn btn-soft" href="{{ url_for('analytics.export_dataset', dataset='expenses', fmt='csv') }}">Expenses CSV</a>
+        <a class="btn btn-soft" href="{{ url_for('analytics.export_dataset', dataset='expenses', fmt='excel') }}">Expenses Excel</a>
+        <a class="btn btn-soft" href="{{ url_for('analytics.export_dataset', dataset='expenses', fmt='json') }}">Expenses JSON</a>
+        <a class="btn btn-soft" href="{{ url_for('analytics.export_dataset', dataset='stats', fmt='csv') }}">Stats CSV</a>
+        <a class="btn btn-soft" href="{{ url_for('analytics.export_dataset', dataset='insights', fmt='csv') }}">Insights CSV</a>
+    </div>
+</div>
+
+<div class="glass-card">
+    <h2 class="page-title">Prediction summary</h2>
+    <div class="row g-3">
+        <div class="col-md-4"><div class="metric-card"><div class="metric-label">Monthly expense forecast</div>{% for row in data.monthly_predictions[:3] %}<div class="subtle">{{ row.month }}: ₹{{ row.predicted_expense }}</div>{% endfor %}</div></div>
+        <div class="col-md-4"><div class="metric-card"><div class="metric-label">Savings forecast</div>{% for row in data.savings_predictions[:3] %}<div class="subtle">{{ row.month }}: ₹{{ row.predicted_savings }}</div>{% endfor %}</div></div>
+        <div class="col-md-4"><div class="metric-card"><div class="metric-label">Anomalies</div><div class="metric-value">{{ data.anomalies|length }}</div></div></div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% block title %}Delete Account · Calex - Calculate Your Expense{% endblock %}
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-lg-6 col-md-8">
+        <div class="glass-card">
+            <h2 class="page-title">Delete account</h2>
+            <p class="subtle">This permanently removes your account and related data.</p>
+            <form method="POST">
+                <button class="btn btn-danger" type="submit">Delete permanently</button>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

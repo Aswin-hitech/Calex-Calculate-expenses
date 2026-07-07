@@ -1,0 +1,28 @@
+/* Teal‑green palette with auto dark‑mode */
+:root {
+  --primary: #2b8a3e; /* teal‑green */
+  --bg: #f5f9ff;
+  --text: #212529;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #1e1e2f;
+    --text: #e0e0e0;
+  }
+}
+body {
+  background-color: var(--bg);
+  color: var(--text);
+  font-family: 'Inter', sans-serif;
+}
+.navbar {
+  background-color: var(--primary) !important;
+}
+.card {
+  border-radius: 0.75rem;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  transition: transform 0.2s;
+}
+.card:hover {
+  transform: translateY(-4px);
+}

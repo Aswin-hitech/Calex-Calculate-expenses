@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+{% block title %}Calex - Calculate Your Expense{% endblock %}
+{% block content %}
+<div class="glass-card hero-card">
+    <div class="row align-items-center g-4">
+        <div class="col-lg-7">
+            <span class="section-label mb-3">Personal Finance Platform</span>
+            <div class="chip-row mb-3">
+                <span class="chip">Expense tracking</span>
+                <span class="chip">Income control</span>
+                <span class="chip">Budget planning</span>
+            </div>
+            <h1 class="display-5 fw-black page-title mb-3">Your money, organized like a product dashboard.</h1>
+            <p class="subtle fs-6 mb-4">Track spending, monitor patterns, generate reports, and make smarter financial decisions without spreadsheet chaos.</p>
+            <div class="d-flex flex-wrap gap-2">
+                <a class="btn btn-primary" href="{{ url_for('auth.register') }}">Get started</a>
+                <a class="btn btn-soft" href="{{ url_for('auth.login') }}">Sign in</a>
+            </div>
+        </div>
+        <div class="col-lg-5">
+            <div class="metric-grid" style="grid-template-columns:1fr; margin-bottom:0;">
+                <div class="metric-card">
+                    <div class="metric-label">Reports</div>
+                    <div class="metric-value">Download PDFs</div>
+                    <div class="subtle mt-2">Monthly and yearly exports with charts and summary tables.</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-label">Insights</div>
+                    <div class="metric-value">Smart patterns</div>
+                    <div class="subtle mt-2">Automatic insights, predictions, and anomaly detection.</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

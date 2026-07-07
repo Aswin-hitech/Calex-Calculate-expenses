@@ -1,0 +1,94 @@
+{% extends 'base.html' %}
+{% block title %}Expenses · Calex - Calculate Your Expense{% endblock %}
+{% block content %}
+<div class="glass-card hero-card">
+    <div class="toolbar">
+        <div>
+            <h1 class="page-title mb-2">Expense ledger</h1>
+            <p class="subtle mb-0">Sort, search, and manage every spending record in one place.</p>
+        </div>
+        <div class="d-flex gap-2 flex-wrap">
+            <a href="{{ url_for('analytics.global_search') }}" class="btn btn-soft">Global Search</a>
+            <a href="{{ url_for('expenses.search_by_category') }}" class="btn btn-soft">Category Search</a>
+            <a href="{{ url_for('expenses.search_by_tags') }}" class="btn btn-soft">Tag Search</a>
+            <a href="{{ url_for('expenses.add_expense') }}" class="btn btn-primary">+ Add Expense</a>
+        </div>
+    </div>
+
+    <div class="metric-grid mb-4">
+        <div class="metric-card">
+            <div class="metric-label">Visible records</div>
+            <div class="metric-value">{{ expenses|length }}</div>
+        </div>
+        <div class="metric-card">
+            <div class="metric-label">Total on page</div>
+            <div class="metric-value">₹{{ total_spend }}</div>
+        </div>
+        <div class="metric-card">
+            <div class="metric-label">Sort mode</div>
+            <div class="metric-value">{{ sort_by|replace('_', ' ')|title }}</div>
+        </div>
+        <div class="metric-card">
+            <div class="metric-label">Order</div>
+            <div class="metric-value">{{ order|upper }}</div>
+        </div>
+    </div>
+
+    <form action="{{ url_for('expenses.search_expenses') }}" method="GET" class="mb-4">
+        <div class="input-group">
+            <input type="text" name="q" class="form-control" placeholder="Search category, location, notes, payment method..." required>
+            <button class="btn btn-primary" type="submit">Search</button>
+        </div>
+    </form>
+
+    <div class="chip-row mb-3">
+        <span class="chip">Sort by</span>
+        <a class="chip text-decoration-none" href="{{ url_for('expenses.list_expenses', sort_by='entry_date', order='desc') }}">Newest</a>
+        <a class="chip text-decoration-none" href="{{ url_for('expenses.list_expenses', sort_by='entry_date', order='asc') }}">Oldest</a>
+        <a class="chip text-decoration-none" href="{{ url_for('expenses.list_expenses', sort_by='amount', order='desc') }}">High amount</a>
+        <a class="chip text-decoration-none" href="{{ url_for('expenses.list_expenses', sort_by='category', order='asc') }}">Category</a>
+    </div>
+
+    {% if expenses %}
+    <div class="table-responsive">
+        <table class="table table-hover align-middle">
+            <thead>
+                <tr>
+                    <th>Date</th>
+                    <th>Category</th>
+                    <th>Description</th>
+                    <th>Amount</th>
+                    <th>Location</th>
+                    <th>Payment</th>
+                    <th class="text-end">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for expense in expenses %}
+                <tr>
+                    <td>{{ expense.entry_date.strftime('%d %b %Y') if expense.entry_date else '-' }}</td>
+                    <td><span class="badge">{{ expense.category }}</span></td>
+                    <td>{{ expense.description or '-' }}</td>
+                    <td class="fw-bold">₹{{ expense.amount }}</td>
+                    <td>{{ expense.location or '-' }}</td>
+                    <td>{{ expense.payment_method or '-' }}</td>
+                    <td class="text-end">
+                        <a href="{{ url_for('expenses.edit_expense', expense_id=expense.id) }}" class="btn btn-sm btn-soft me-1">Edit</a>
+                        <form action="{{ url_for('expenses.delete_expense', expense_id=expense.id) }}" method="POST" class="d-inline" onsubmit="return confirmDelete();">
+                            <button type="submit" class="btn btn-sm btn-outline-danger">Delete</button>
+                        </form>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    {% else %}
+    <div class="text-center py-5">
+        <h3 class="page-title mb-2">No expenses yet</h3>
+        <p class="subtle mb-4">Add your first record to start the ledger.</p>
+        <a href="{{ url_for('expenses.add_expense') }}" class="btn btn-primary">Add expense</a>
+    </div>
+    {% endif %}
+</div>
+{% endblock %}
