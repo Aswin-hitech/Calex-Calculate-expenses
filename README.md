@@ -313,4 +313,4 @@ Focused on AI, Data Analytics, Business Intelligence, Full Stack Development, an
 
 ## License
 
-This project is developed for educational and portfolio purposes.
+This project is developed for educational and open source contribution purpose.
