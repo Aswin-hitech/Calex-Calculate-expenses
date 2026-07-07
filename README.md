@@ -1,4 +1,4 @@
-# Personal Expense Analytics & Management System
+# Calex- A Personal Expense Tracking system
 
 A full-stack Business Intelligence solution for personal expense tracking, management, and analytics using **Flask**, **PostgreSQL (Neon)**, and **Power BI**.
 
